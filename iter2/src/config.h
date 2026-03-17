@@ -75,7 +75,7 @@ constexpr float  SRB_RADIUS     = 0.175f;
 constexpr float  SRB_OFFSET_X   = 0.68f;
 constexpr float  SRB_OFFSET_Y   = ET_OFFSET_Y;
 constexpr float  SRB_NOSE_LEN   = 0.30f;
-constexpr float  SRB_SKIRT_RAD  = 0.22f;
+constexpr float  SRB_SKIRT_RAD  = 0.26f;
 constexpr float  SRB_SKIRT_LEN  = 0.25f;
 constexpr int    SRB_SLICES     = 24;
 
