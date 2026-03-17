@@ -22,50 +22,72 @@
 
 // ---------------------------------------------------------------------------
 // Helper: draw one wing on the +X side. Caller mirrors for -X side.
+//   The wing is a swept trapezoid with slight thickness.
+//   Root attaches at fuselage side, tip at WING_SPAN/2.
 // ---------------------------------------------------------------------------
 static void drawOneWing() {
     float halfThick = Cfg::WING_THICKNESS * 0.5f;
-
+ 
+    // Wing root is at the fuselage radius, tip at half-span
     float xRoot = Cfg::FUS_RADIUS_AFT;
     float xTip  = Cfg::WING_SPAN * 0.5f;
-
+ 
+    // Sweep offset: how far back the tip leading edge is from root leading edge
     float sweepRad    = static_cast<float>(Cfg::WING_SWEEP_DEG * M_PI / 180.0);
     float sweepOffset = (xTip - xRoot) * tanf(sweepRad);
-
-    float zRootLE = Cfg::WING_Z_ATTACH;
-    float zRootTE = Cfg::WING_Z_ATTACH - Cfg::WING_CHORD_ROOT;
-    float zTipLE  = zRootLE - sweepOffset;
-    float zTipTE  = zTipLE  - Cfg::WING_CHORD_TIP;
-
+ 
+    // Z coordinates (fuselage runs along +Z, aft is Z=0)
+    float zRootLE = Cfg::WING_Z_ATTACH;                          // root leading edge
+    float zRootTE = Cfg::WING_Z_ATTACH - Cfg::WING_CHORD_ROOT;   // root trailing edge
+    float zTipLE  = zRootLE - sweepOffset;                       // tip leading edge (swept back)
+    float zTipTE  = zTipLE  - Cfg::WING_CHORD_TIP;               // tip trailing edge
+ 
+    // Four corners of wing planform (Y = +/- halfThick for top/bottom)
     // Top surface
-    float topRL[3] = { xRoot, halfThick, zRootLE };
-    float topRT[3] = { xRoot, halfThick, zRootTE };
-    float topTT[3] = { xTip,  halfThick, zTipTE  };
-    float topTL[3] = { xTip,  halfThick, zTipLE  };
-
+    float topRL[3] = { xRoot,  halfThick, zRootLE };
+    float topRT[3] = { xRoot,  halfThick, zRootTE };
+    float topTT[3] = { xTip,   halfThick, zTipTE  };
+    float topTL[3] = { xTip,   halfThick, zTipLE  };
+ 
     // Bottom surface
     float botRL[3] = { xRoot, -halfThick, zRootLE };
     float botRT[3] = { xRoot, -halfThick, zRootTE };
     float botTT[3] = { xTip,  -halfThick, zTipTE  };
     float botTL[3] = { xTip,  -halfThick, zTipLE  };
-
-    matWing();
-
-    DrawQuad(topRL, topRT, topTT, topTL);      // Top face
-    DrawQuad(botRL, botTL, botTT, botRT);      // Bottom face
-    DrawQuad(topRL, topTL, botTL, botRL);      // Leading edge
-    DrawQuad(topRT, botRT, botTT, topTT);      // Trailing edge
-    DrawQuad(topTL, topTT, botTT, botTL);      // Tip edge
+ 
+    glColor3fv(Cfg::COL_WING);
+ 
+    // Top face (normal +Y)
+    DrawQuad(topRL, topTL, topTT, topRT);
+ 
+    // Bottom face (normal -Y)
+    DrawQuad(botRL, botRT, botTT, botTL);
+ 
+    // Leading edge (front of wing)
+    DrawQuad(topRL, botRL, botTL, topTL);
+ 
+    // Trailing edge (back of wing)
+    DrawQuad(topRT, topTT, botTT, botRT);
+ 
+    // Tip edge (outer)
+    DrawQuad(topTL, botTL, botTT, topTT);
 }
-
+ 
+// ---------------------------------------------------------------------------
+// drawWings: draws both left and right delta wings.
+// ---------------------------------------------------------------------------
 void drawWings() {
+    // Right wing (+X side)
     glPushMatrix();
     drawOneWing();
     glPopMatrix();
-
+ 
+    // Left wing (-X side) — mirror
     glPushMatrix();
     glScalef(-1.0f, 1.0f, 1.0f);
+    glFrontFace(GL_CW);
     drawOneWing();
+    glFrontFace(GL_CCW);
     glPopMatrix();
 }
 
