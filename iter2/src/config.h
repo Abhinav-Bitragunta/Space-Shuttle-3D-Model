@@ -28,13 +28,13 @@ constexpr float  WING_CHORD_ROOT = 1.2f;
 constexpr float  WING_CHORD_TIP  = 0.3f;
 constexpr float  WING_THICKNESS  = 0.04f;
 constexpr float  WING_SWEEP_DEG  = 45.0f;
-constexpr float  WING_Z_ATTACH   = 1.5f; // originally -0.5f
+constexpr float  WING_Z_ATTACH   = 1.5f; 
 
 // ── Vertical Stabilizer ─────────────────────────────────
 constexpr float  VSTAB_HEIGHT     = 0.7f;
 constexpr float  VSTAB_CHORD_BASE = 0.9f;
 constexpr float  VSTAB_CHORD_TIP  = 0.3f;
-constexpr float  VSTAB_Z_ATTACH   = 0.3f; // originally -1.6f
+constexpr float  VSTAB_Z_ATTACH   = 0.3f; 
 
 // ── Crew Cabin (Iter 2) ────────────────────────────────
 constexpr float  CABIN_HUMP_WIDTH   = 0.30f;
@@ -58,7 +58,7 @@ constexpr float  PBAY_BORDER   = 0.015f;
 // ── External Tank ───────────────────────────────────────
 constexpr float  ET_LENGTH    = 4.8f;
 constexpr float  ET_RADIUS    = 0.44f;
-constexpr float  ET_OFFSET_Y  = -0.68f;   // was -0.55f
+constexpr float  ET_OFFSET_Y  = -0.68f;   
 constexpr float  ET_OFFSET_Z  = -0.30f;
 constexpr int    ET_SLICES    = 24;
 constexpr int    ET_DOME_STACKS = 12;
@@ -87,9 +87,9 @@ constexpr float  SRB_STRUT_HEIGHT  = 0.025f;
 constexpr float  SSME_BELL_RADIUS   = 0.12f;
 constexpr float  SSME_THROAT_RADIUS = 0.04f;
 constexpr float  SSME_DEPTH         = 0.20f;
-constexpr float  SSME_SPACING       = 0.30f;   // was 0.22f
+constexpr float  SSME_SPACING       = 0.30f;   
 constexpr int    SSME_SLICES        = 24;
-constexpr float  SSME_CLUSTER_Y     = 0.08f;  // was 0.05f
+constexpr float  SSME_CLUSTER_Y     = 0.08f;  
 
 // ── OMS Pods (Iter 2) ──────────────────────────────────
 constexpr float  OMS_LENGTH   = 0.70f;
@@ -98,21 +98,6 @@ constexpr float  OMS_OFFSET_X = 0.28f;
 constexpr float  OMS_OFFSET_Y = 0.10f;
 constexpr float  OMS_OFFSET_Z = -0.10f;
 constexpr int    OMS_SLICES   = 16;
-
-// ── Interior (Iter 4) ──────────────────────────────────
-constexpr float  CABIN_WIDTH  = 0.48f;
-constexpr float  DECK_HEIGHT  = 0.45f;
-constexpr int    PANEL_ROWS   = 4;
-constexpr int    PANEL_COLS   = 6;
-
-// ── Stars (Iter 5) ─────────────────────────────────────
-constexpr int    STAR_COUNT    = 2000;
-constexpr float  STAR_SPHERE_R = 80.0f;
-
-// ── Animation (Iter 5) ─────────────────────────────────
-constexpr float  DOOR_OPEN_DEG   = 175.0f;
-constexpr float  DOOR_ANIM_SPEED = 60.0f;
-constexpr float  SRB_SEP_SPEED   = 0.4f;
 
 // ── Camera Defaults ─────────────────────────────────────
 constexpr float  CAM_DEFAULT_AZIMUTH    = 30.0f;
