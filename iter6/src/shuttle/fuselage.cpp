@@ -55,7 +55,7 @@ void drawFuselage() {
         glRotatef(90.0f, 0.0f, 0.0f, 1.0f);         // Rotate 90 degrees to run longitudinally
         glTranslatef(-0.75f, -textCenterT, 0.0f);
 
-        DrawTexturedCylinder(Cfg::FUS_RADIUS_AFT + 0.002f, Cfg::FUS_RADIUS_FWD + 0.002f, Cfg::FUS_LENGTH, Cfg::FUS_SLICES, false);
+        DrawTexturedCylinder(Cfg::FUS_RADIUS_AFT + 0.002f, Cfg::FUS_RADIUS_FWD + 0.002f, Cfg::FUS_LENGTH, Cfg::FUS_SLICES);
         glPopMatrix();
 
         glScalef(-8.0f, 4.0f, 1.0f);
@@ -63,7 +63,7 @@ void drawFuselage() {
         glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
         glTranslatef(-0.25f, -textCenterT, 0.0f);
 
-        DrawTexturedCylinder(Cfg::FUS_RADIUS_AFT + 0.002f, Cfg::FUS_RADIUS_FWD + 0.002f, Cfg::FUS_LENGTH, Cfg::FUS_SLICES, false);
+        DrawTexturedCylinder(Cfg::FUS_RADIUS_AFT + 0.002f, Cfg::FUS_RADIUS_FWD + 0.002f, Cfg::FUS_LENGTH, Cfg::FUS_SLICES);
         glPopMatrix();
 
         glMatrixMode(GL_MODELVIEW); 

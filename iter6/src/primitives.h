@@ -6,7 +6,7 @@ void DrawBox(float w, float h, float d);
 
 // Cylinder along +Z axis, both caps drawn if closed=true.
 void DrawCylinder(float rBase, float rTop, float length, int slices, bool closed = true);
-void DrawTexturedCylinder(float rBase, float rTop, float length, int slices, bool closed);
+void DrawTexturedCylinder(float rBase, float rTop, float length, int slices);
 
 // cone (rTop = 0)
 inline void DrawCone(float rBase, float length, int slices) {

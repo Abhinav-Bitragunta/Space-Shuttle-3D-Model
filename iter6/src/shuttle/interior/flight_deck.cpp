@@ -214,7 +214,6 @@ static void drawInstrumentPanel() {
     matIntFrame();
     float ft = 0.012f;
     float outerW = panelW + ft * 2.0f;
-    float outerH = panelH + ft * 2.0f;
     // Top
     glPushMatrix();
     glTranslatef(0.0f, panelMidY + panelH * 0.5f + ft * 0.5f, Cfg::INST_PANEL_Z - 0.005f);

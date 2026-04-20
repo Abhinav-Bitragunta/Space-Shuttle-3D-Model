@@ -2,6 +2,5 @@
 
 #pragma once
 
-static void drawFuselageText();
 void drawFuselage();
 void drawNoseCone();

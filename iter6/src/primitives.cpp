@@ -91,7 +91,7 @@ void DrawCylinder(float rBase, float rTop, float length, int slices, bool closed
     gluDeleteQuadric(q);
 }
 
-void DrawTexturedCylinder(float rBase, float rTop, float length, int slices, bool closed) {
+void DrawTexturedCylinder(float rBase, float rTop, float length, int slices) {
     GLUquadric* q = gluNewQuadric();
     gluQuadricNormals(q, GLU_SMOOTH);
     gluQuadricTexture(q, GL_TRUE); // texture mapping
