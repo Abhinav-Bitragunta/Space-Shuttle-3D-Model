@@ -1,7 +1,4 @@
-// wings.h
-
-// Iteration: 1
-// Description: Delta wings and vertical stabilizer geometry.
+// Delta wings and vertical stabilizer geometry.
 
 #pragma once
 

@@ -1,8 +1,4 @@
-// payload_bay.cpp
-
-// Iteration: 4 (Iter 5: two-segment doors around overhead panel)
-// Description: Animated cabin roof doors — split into aft and forward
-//              segments to clear the overhead switch panel.
+// Animated cabin roof doors 
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -15,12 +11,7 @@
 #include "../../primitives.h"
 #include "../../materials.h"
 
-// ---------------------------------------------------------------------------
-// drawOneDoorPanel: a single door panel with structural ribs.
-//   Drawn in local coords: hinge at X=0, extends in +X.
-//   doorLen: Z-extent of this segment.
-//   ribCount: number of transverse ribs.
-// ---------------------------------------------------------------------------
+// A single door panel with structural ribs
 static void drawOneDoorPanel(float doorLen, int ribCount) {
     float doorW = Cfg::PBAY_WIDTH * 0.5f;
     float halfW = doorW * 0.5f;
@@ -50,13 +41,7 @@ static void drawOneDoorPanel(float doorLen, int ribCount) {
     glPopMatrix();
 }
 
-// ---------------------------------------------------------------------------
-// drawDoorPair: left + right door panels for one segment.
-//   segMidZ: Z centre of this segment (orbiter-local).
-//   segLen:  Z length of this segment.
-//   ribCount: ribs per panel.
-//   doorAngleDeg: 0 = closed, DOOR_OPEN_DEG = fully open.
-// ---------------------------------------------------------------------------
+// left + right door panels for one segment
 static void drawDoorPair(float segMidZ, float segLen, int ribCount,
     float doorAngleDeg) {
     float halfW = Cfg::PBAY_WIDTH * 0.5f;
@@ -73,16 +58,13 @@ static void drawDoorPair(float segMidZ, float segLen, int ribCount,
     glTranslatef(halfW, Cfg::PBAY_Y, segMidZ);
     glRotatef(-doorAngleDeg, 0.0f, 0.0f, 1.0f);
     glScalef(-1.0f, 1.0f, 1.0f);
-    glFrontFace(GL_CW);   // negative scale flips winding
+    glFrontFace(GL_CW);   
     drawOneDoorPanel(segLen, ribCount);
-    glFrontFace(GL_CCW);  // restore
+    glFrontFace(GL_CCW);  
     glPopMatrix();
 }
 
-// ---------------------------------------------------------------------------
-// drawPayloadBayDoors: two door segments — aft and forward — that together
-//   cover the cabin roof while clearing the overhead switch panel.
-// ---------------------------------------------------------------------------
+// two door segments - aft and forward
 void drawPayloadBayDoors(float doorAngleDeg) {
     // Aft segment (behind overhead panel)
     float aftMidZ = Cfg::DOOR_AFT_Z_START + Cfg::DOOR_AFT_LENGTH * 0.5f;

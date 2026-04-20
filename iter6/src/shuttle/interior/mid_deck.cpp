@@ -9,9 +9,6 @@
 #include "../../primitives.h"
 #include "../../materials.h"
 
-
-// Room dimensions
-
 static const float kHalfW = Cfg::MD_WIDTH * 0.5f;
 static const float kFloorY = Cfg::MD_FLOOR_Y;
 static const float kCeilY = Cfg::MD_CEIL_Y;
@@ -21,8 +18,6 @@ static const float kLen = Cfg::MD_Z_FWD - Cfg::MD_Z_AFT;
 static const float kRoomH = Cfg::MD_CEIL_Y - Cfg::MD_FLOOR_Y;
 
 
-// Room enclosure - same overlap strategy as flight deck
-
 static void drawRoomEnclosure() {
     // Floor: extends past side walls
     matIntFloor();
@@ -31,14 +26,14 @@ static void drawRoomEnclosure() {
     DrawBox(Cfg::MD_WIDTH + kWT * 2.0f, kWT, kLen + kWT * 2.0f);
     glPopMatrix();
 
-    // Ceiling (= flight deck floor — shared slab)
+    // Ceiling 
     matIntWall();
     glPushMatrix();
     glTranslatef(0.0f, kCeilY + kWT * 0.5f, kMidZ);
     DrawBox(Cfg::MD_WIDTH + kWT * 2.0f, kWT, kLen + kWT * 2.0f);
     glPopMatrix();
 
-    // Left wall: full Z span covers corner seams
+    // Left wall
     glPushMatrix();
     glTranslatef(-kHalfW - kWT * 0.5f, (kFloorY + kCeilY) * 0.5f, kMidZ);
     DrawBox(kWT, kRoomH, kLen + kWT * 2.0f);
@@ -50,7 +45,7 @@ static void drawRoomEnclosure() {
     DrawBox(kWT, kRoomH, kLen + kWT * 2.0f);
     glPopMatrix();
 
-    // Aft wall (fits inside side walls)
+    // Aft wall 
     glPushMatrix();
     glTranslatef(0.0f, (kFloorY + kCeilY) * 0.5f, Cfg::MD_Z_AFT - kWT * 0.5f);
     DrawBox(Cfg::MD_WIDTH, kRoomH, kWT);
@@ -67,7 +62,7 @@ static void drawRoomEnclosure() {
     float trimH = 0.008f;
     float trimD = 0.008f;
 
-    // Floor trim — all four walls
+    // Floor trim - all four walls
     glPushMatrix();
     glTranslatef(-kHalfW + trimD * 0.5f, kFloorY + trimH * 0.5f, kMidZ);
     DrawBox(trimD, trimH, kLen);
@@ -106,7 +101,6 @@ static void drawRoomEnclosure() {
 
 
 // Locker wall: grid of lockers with handles and label strips
-
 static void drawLockerWall(float wallX, float faceSign) {
     float totalW = Cfg::LOCKER_COLS * (Cfg::LOCKER_W + Cfg::LOCKER_GAP) - Cfg::LOCKER_GAP;
     float startZ = Cfg::MD_Z_AFT + (kLen - totalW) * 0.5f;
@@ -140,7 +134,7 @@ static void drawLockerWall(float wallX, float faceSign) {
             DrawBox(0.003f, 0.008f, Cfg::LOCKER_W * 0.5f);
             glPopMatrix();
 
-            // Door seam line (thin frame around face)
+            // Door seam line 
             matIntFrame();
             float seam = 0.002f;
             float faceX = wallX + faceSign * (Cfg::LOCKER_D + 0.001f);
@@ -160,7 +154,6 @@ static void drawLockerWall(float wallX, float faceSign) {
 
 
 // Floor grid: panel lines on the mid-deck floor
-
 static void drawFloorGrid() {
     matIntFrame();
 
@@ -188,7 +181,6 @@ static void drawFloorGrid() {
 
 
 // Ladder: vertical ladder on the aft wall connecting to flight deck
-
 static void drawLadder() {
     matIntFrame();
 
@@ -223,7 +215,6 @@ static void drawLadder() {
 
 
 // Equipment rack on aft wall
-
 static void drawEquipmentRack() {
     float rackW = 0.12f;
     float rackH = kRoomH * 0.6f;
@@ -253,7 +244,6 @@ static void drawEquipmentRack() {
 
 
 // Floor hatch frame and cover
-
 static void drawFloorHatch() {
     matIntHatch();
 
@@ -300,11 +290,10 @@ static void drawFloorHatch() {
 
 
 // drawMidDeck: assembles all mid-deck components
-
 void drawMidDeck() {
     drawRoomEnclosure();
-    drawLockerWall(-kHalfW, 1.0f);   // left wall — face +X
-    drawLockerWall(kHalfW, -1.0f);   // right wall — face -X
+    drawLockerWall(-kHalfW, 1.0f);   // left wall - face +X
+    drawLockerWall(kHalfW, -1.0f);   // right wall - face -X
     drawFloorGrid();
     drawLadder();
     drawEquipmentRack();

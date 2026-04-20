@@ -30,12 +30,12 @@ GLuint loadStringTexture(const char* text, const char* fontPath) {
         return 0;
     }
 
-    int pixelHeight = 128; // Render at high resolution for crispness
+    int pixelHeight = 128; // High resolution
     float scale = stbtt_ScaleForPixelHeight(&font, pixelHeight);
     int ascent, descent, lineGap;
     stbtt_GetFontVMetrics(&font, &ascent, &descent, &lineGap);
 
-    // 1. Calculate total string width
+    // Total string width
     int totalWidth = 0;
     int i = 0;
     while (text[i]) {
@@ -46,7 +46,7 @@ GLuint loadStringTexture(const char* text, const char* fontPath) {
         i++;
     }
 
-    // 2. Allocate bitmap
+    // Allocating bitmap
     int texHeight = pixelHeight;
     int texWidth = totalWidth + 20; // 20px padding
     std::vector<unsigned char> bitmap(texWidth * texHeight, 0);
@@ -54,7 +54,7 @@ GLuint loadStringTexture(const char* text, const char* fontPath) {
     float xpos = 10.0f; // Padding offset
     int baseline = (int)(ascent * scale);
 
-    // 3. Render characters to bitmap
+    // Rendering characters to bitmap
     i = 0;
     while (text[i]) {
         int advance, lsb, x0, y0, x1, y1;
@@ -72,21 +72,19 @@ GLuint loadStringTexture(const char* text, const char* fontPath) {
         i++;
     }
 
-    // 4. Convert 8-bit monochrome to 32-bit RGBA (Dark Grey text with Alpha transparency)
+    // Converting 8-bit monochrome to 32-bit RGBA 
     std::vector<unsigned char> rgba(texWidth * texHeight * 4);
     for (int j = 0; j < texWidth * texHeight; ++j) {
-        rgba[j * 4 + 0] = 38;  // R (Dark Grey)
-        rgba[j * 4 + 1] = 38;  // G
-        rgba[j * 4 + 2] = 38;  // B
-        rgba[j * 4 + 3] = bitmap[j]; // A (Transparency mapped to font curve)
+        rgba[j * 4 + 0] = 38;  
+        rgba[j * 4 + 1] = 38;  
+        rgba[j * 4 + 2] = 38;  
+        rgba[j * 4 + 3] = bitmap[j]; 
     }
 
-    // 5. Upload to GPU
     GLuint tex;
     glGenTextures(1, &tex);
     glBindTexture(GL_TEXTURE_2D, tex);
 
-    // Clamp to border with a transparent border color so the text doesn't tile endlessly
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
     float borderColor[] = { 0.0f, 0.0f, 0.0f, 0.0f };

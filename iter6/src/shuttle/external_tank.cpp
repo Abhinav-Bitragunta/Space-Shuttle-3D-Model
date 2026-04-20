@@ -1,7 +1,4 @@
-// external_tank.cpp
-
-// Iteration: 2 (Iter 3: materials)
-// Description: External Tank — orange cylinder with hemispherical dome.
+// External Tank: orange cylinder with hemispherical dome.
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>

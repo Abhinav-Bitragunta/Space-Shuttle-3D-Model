@@ -1,7 +1,4 @@
-// srb.cpp
-
-// Iteration: 2 (Iter 3: materials)
-// Description: Single Solid Rocket Booster — aft skirt, main body, nose cone.
+// Single Solid Rocket Booster with aft skirt, main body, nose cone.
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>

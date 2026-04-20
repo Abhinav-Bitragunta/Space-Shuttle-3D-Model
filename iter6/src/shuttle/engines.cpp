@@ -1,9 +1,4 @@
-// engines.cpp
-
-// Iteration: 2 (Iter 3: materials, SSME centroid fix)
-// Description: SSME main engine bell nozzles (three, drawn as nested
-//              disk annuli + frustum bells) and OMS pods (blunt cylinders
-//              with dome caps).
+// SSME main engine bell nozzles and OMS pods 
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -16,9 +11,7 @@
 #include "../primitives.h"
 #include "../materials.h"
 
-// ---------------------------------------------------------------------------
-// drawOneBell: single SSME bell nozzle at local origin, opening toward -Z.
-// ---------------------------------------------------------------------------
+// single SSME bell nozzle at local origin, opening toward -Z.
 static void drawOneBell() {
     matNozzle();
 
@@ -45,16 +38,9 @@ static void drawOneBell() {
     glPopMatrix();
 }
 
-// ---------------------------------------------------------------------------
-// drawSSMENozzles: cluster of three SSME bells in a triangle pattern.
-//   The cluster is centred on its own centroid so that the caller's Y
-//   offset (SSME_CLUSTER_Y) positions the whole group correctly.
-//   Two lower bells at -CLUSTER_Y, one upper bell at +CLUSTER_Y*1.5.
-//   Centroid Y = (-CY + -CY + 1.5*CY) / 3 = -CY/6.
-//   We shift everything by +CY/6 to centre the group.
-// ---------------------------------------------------------------------------
+// cluster of three SSME bells in a triangle pattern.
 void drawSSMENozzles() {
-    // Compute centroid offset to centre the triangle arrangement
+    
     float lowerY =  -Cfg::SSME_CLUSTER_Y;
     float upperY =   Cfg::SSME_CLUSTER_Y * 1.5f;
     float centroidY = (lowerY + lowerY + upperY) / 3.0f;
@@ -78,9 +64,7 @@ void drawSSMENozzles() {
     glPopMatrix();
 }
 
-// ---------------------------------------------------------------------------
-// drawOMSPod: single OMS pod at local origin along +Z.
-// ---------------------------------------------------------------------------
+// single OMS pod at local origin along +Z.
 void drawOMSPod() {
     matOMS();
 

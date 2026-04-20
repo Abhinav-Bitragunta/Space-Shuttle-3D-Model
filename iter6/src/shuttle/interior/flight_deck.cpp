@@ -10,7 +10,6 @@
 #include "../../materials.h"
 
 
-// Room dimensions
 static const float kHalfW = Cfg::FD_WIDTH * 0.5f;
 static const float kFloorY = Cfg::FD_FLOOR_Y;
 static const float kCeilY = Cfg::FD_FLOOR_Y + Cfg::FD_HEIGHT;
@@ -20,16 +19,14 @@ static const float kLen = Cfg::FD_Z_FWD - Cfg::FD_Z_AFT;
 static const float kRoomH = Cfg::FD_HEIGHT;
 
 
-// Room enclosure
 static void drawRoomEnclosure() {
-    // Floor: extends past side walls to cover corner seams
     matIntFloor();
     glPushMatrix();
     glTranslatef(0.0f, kFloorY - kWT * 0.5f, kMidZ);
     DrawBox(Cfg::FD_WIDTH + kWT * 2.0f, kWT, kLen + kWT * 2.0f);
     glPopMatrix();
 
-    // Left wall: full Z length covers aft/fwd wall ends
+    // Left wall
     glPushMatrix();
     glTranslatef(-kHalfW - kWT * 0.5f, (kFloorY + kCeilY) * 0.5f, kMidZ);
     DrawBox(kWT, kRoomH, kLen + kWT * 2.0f);
@@ -41,13 +38,13 @@ static void drawRoomEnclosure() {
     DrawBox(kWT, kRoomH, kLen + kWT * 2.0f);
     glPopMatrix();
 
-    // Aft wall: fits inside side walls (side walls cover corners)
+    // Aft wall
     glPushMatrix();
     glTranslatef(0.0f, (kFloorY + kCeilY) * 0.5f, Cfg::FD_Z_AFT - kWT * 0.5f);
     DrawBox(Cfg::FD_WIDTH, kRoomH, kWT);
     glPopMatrix();
 
-    // Forward wall (instrument panel backing)
+    // Forward wall with instrument panel backing
     glPushMatrix();
     glTranslatef(0.0f, (kFloorY + kCeilY) * 0.5f, Cfg::FD_Z_FWD + kWT * 0.5f);
     DrawBox(Cfg::FD_WIDTH, kRoomH, kWT);
@@ -67,18 +64,18 @@ static void drawRoomEnclosure() {
     glTranslatef(kHalfW - trimD * 0.5f, kFloorY + trimH * 0.5f, kMidZ);
     DrawBox(trimD, trimH, kLen);
     glPopMatrix();
-    // Floor trim — aft
+    // Floor trim - aft
     glPushMatrix();
     glTranslatef(0.0f, kFloorY + trimH * 0.5f, Cfg::FD_Z_AFT + trimD * 0.5f);
     DrawBox(Cfg::FD_WIDTH, trimH, trimD);
     glPopMatrix();
-    // Floor trim — forward
+    // Floor trim - forward
     glPushMatrix();
     glTranslatef(0.0f, kFloorY + trimH * 0.5f, Cfg::FD_Z_FWD - trimD * 0.5f);
     DrawBox(Cfg::FD_WIDTH, trimH, trimD);
     glPopMatrix();
 
-    // Wall-top trim at door hinge level (where walls meet door panels)
+    // Wall-top trim at door hinge level
     glPushMatrix();
     glTranslatef(-kHalfW + trimD * 0.5f, kCeilY - trimH * 0.5f, kMidZ);
     DrawBox(trimD, trimH, kLen);
@@ -88,14 +85,11 @@ static void drawRoomEnclosure() {
     DrawBox(trimD, trimH, kLen);
     glPopMatrix();
 
-    // The doors (PBAY_WIDTH) are narrower than the room (FD_WIDTH).
-    // These fixed strips bridge the gap on each side, acting as the
-    // structural rail that the doors close against.
     matIntFrame();
     float doorHalfW = Cfg::PBAY_WIDTH * 0.5f;
-    float stripW = kHalfW - doorHalfW;  // gap per side
+    float stripW = kHalfW - doorHalfW;  
     if (stripW > 0.001f) {
-        float stripY = kCeilY;  // flush with wall tops
+        float stripY = kCeilY;  
         // Left rail strip
         glPushMatrix();
         glTranslatef(-(doorHalfW + stripW * 0.5f), stripY, kMidZ);
@@ -111,7 +105,6 @@ static void drawRoomEnclosure() {
 
 
 // Seat with armrests and headrest
-
 static void drawSeat() {
     matIntSeat();
 
@@ -178,7 +171,6 @@ static void drawSeat() {
 
 
 // T-shaped stick in front of seat
-
 static void drawControlYoke() {
     matIntFrame();
 
@@ -205,8 +197,7 @@ static void drawControlYoke() {
 }
 
 
-// Instrument panel — 4×6 gauges with full bezel framing
-
+// Instrument panel - 4×6 gauges with full bezel framing
 static void drawInstrumentPanel() {
     float panelW = Cfg::INST_COLS * (Cfg::INST_GAUGE_W + Cfg::INST_GAP) - Cfg::INST_GAP + 0.05f;
     float panelH = Cfg::INST_ROWS * (Cfg::INST_GAUGE_H + Cfg::INST_GAP) - Cfg::INST_GAP + 0.05f;
@@ -291,14 +282,12 @@ static void drawInstrumentPanel() {
         }
     }
 
-    // Reset emissive from gauge materials
     float noEmit[] = { 0.0f, 0.0f, 0.0f, 1.0f };
     glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, noEmit);
 }
 
 
 // Overhead panel with switch indicators
-
 static void drawOverheadPanel() {
     matIntPanel();
     glPushMatrix();
@@ -413,7 +402,6 @@ static void drawWindshieldFrames() {
 
 
 // Side consoles with button rows
-
 static void drawSideConsoles() {
     for (int side = -1; side <= 1; side += 2) {
         float cx = side * (kHalfW - Cfg::SIDE_CON_W * 0.5f);
@@ -444,7 +432,6 @@ static void drawSideConsoles() {
 
 
 // Centre console with throttle levers
-
 static void drawCentreConsole() {
     matIntConsole();
     glPushMatrix();
@@ -465,9 +452,6 @@ static void drawCentreConsole() {
         glPopMatrix();
     }
 }
-
-
-// main()
 
 void drawFlightDeck() {
     drawRoomEnclosure();

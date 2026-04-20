@@ -1,7 +1,4 @@
-// orbiter.cpp
-
-// Iteration: 1 (Iter 2: exterior details, Iter 3: materials, Iter 4: interior)
-// Description: Draws the complete Orbiter — exterior + interior.
+// Draws the complete Orbiter: exterior + interior.
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -20,13 +17,9 @@
 #include "../primitives.h"
 #include "../materials.h"
 
-// Declared in scene.h — avoids circular include
 extern bool gInteriorMode;
 extern float gDoorAngle;
 
-// ---------------------------------------------------------------------------
-// drawCrewCabin: forward protrusion on upper fuselage with windshield.
-// ---------------------------------------------------------------------------
 static void drawCrewCabin() {
     glPushMatrix();
     glTranslatef(0.0f,
@@ -64,11 +57,8 @@ static void drawCrewCabin() {
     }
 }
 
-// ---------------------------------------------------------------------------
-// drawOrbiter
-// ---------------------------------------------------------------------------
 void drawOrbiter() {
-    // ── Exterior shell ──────────────────────────────────
+    // Exterior shell
     glPushMatrix(); drawFuselage();           glPopMatrix();
     glPushMatrix();
     glTranslatef(0.0f, 0.0f, Cfg::FUS_LENGTH);
@@ -79,7 +69,7 @@ void drawOrbiter() {
     glPushMatrix(); drawVerticalStabilizer(); glPopMatrix();
     glPushMatrix(); drawCrewCabin();          glPopMatrix();
 
-    // Payload bay doors (always drawn — animated)
+    // Payload bay doors 
     glPushMatrix(); drawPayloadBayDoors(gDoorAngle); glPopMatrix();
 
     // SSME nozzles
@@ -96,19 +86,16 @@ void drawOrbiter() {
     glPushMatrix();
     glTranslatef(-Cfg::OMS_OFFSET_X, Cfg::OMS_OFFSET_Y, Cfg::OMS_OFFSET_Z);
     glScalef(-1.0f, 1.0f, 1.0f);
-    glFrontFace(GL_CW);   // negative scale flips winding — tell GL
+    glFrontFace(GL_CW);   // negative scale flips winding 
     drawOMSPod();
     glFrontFace(GL_CCW);  // restore default winding
     glPopMatrix();
 
-    // ── Interior (Iter 4) — only in interior mode ───────
+    // Interior - only in interior mode
     if (gInteriorMode) {
         glPushAttrib(GL_ENABLE_BIT | GL_LIGHTING_BIT);
         glDisable(GL_CULL_FACE);
-        // Disable GL_COLOR_MATERIAL so glMaterialfv values (ambient, diffuse,
-        // specular, shininess) actually drive the lighting equation instead of
-        // being overridden by glColor3fv.  glColor still works as the unlit
-        // fallback when lighting is toggled off.
+        // Disable GL_COLOR_MATERIAL to prevent being overridden by glColor3fv
         glDisable(GL_COLOR_MATERIAL);
 
         drawFlightDeck();
