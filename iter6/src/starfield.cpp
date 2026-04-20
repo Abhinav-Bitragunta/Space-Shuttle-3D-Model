@@ -1,9 +1,3 @@
-// starfield.cpp
-
-// Iteration: 5
-// Description: Generates 2000 random star positions on a sphere and
-//              compiles them into a display list for fast rendering.
-
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -26,13 +20,13 @@ void initStarfield() {
     glNewList(sStarList, GL_COMPILE);
 
     glBegin(GL_POINTS);
-    srand(42);  // fixed seed for reproducible star pattern
+    srand(42);
     for (int i = 0; i < Cfg::STAR_COUNT; ++i) {
-        // Uniform random point on sphere via spherical coords
         float u = static_cast<float>(rand()) / RAND_MAX;
         float v = static_cast<float>(rand()) / RAND_MAX;
         float theta = 2.0f * static_cast<float>(M_PI) * u;
         float phi = acosf(2.0f * v - 1.0f);
+
 
         float x = Cfg::STAR_SPHERE_R * sinf(phi) * cosf(theta);
         float y = Cfg::STAR_SPHERE_R * sinf(phi) * sinf(theta);

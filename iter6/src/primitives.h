@@ -1,9 +1,4 @@
-// primitives.h
-
-// Iteration: 1
-// Description: Reusable geometry builder wrappers. All geometry in the
-//              project reduces to calls from this file.
-
+// Reusable geometry builder wrappers.
 #pragma once
 
 // Axis-aligned solid box centred at local origin. Computes normals.
@@ -13,12 +8,12 @@ void DrawBox(float w, float h, float d);
 void DrawCylinder(float rBase, float rTop, float length, int slices, bool closed = true);
 void DrawTexturedCylinder(float rBase, float rTop, float length, int slices, bool closed);
 
-// Convenience: cone (rTop = 0)
+// cone (rTop = 0)
 inline void DrawCone(float rBase, float length, int slices) {
     DrawCylinder(rBase, 0.0f, length, slices, true);
 }
 
-// Flat ring (annulus) in XY plane.
+// Annulus in XY plane.
 void DrawDisk(float rInner, float rOuter, int slices);
 
 // Arbitrary quad with auto-computed face normal.
@@ -27,7 +22,7 @@ void DrawQuad(float p0[3], float p1[3], float p2[3], float p3[3]);
 // Hemispherical cap along +Z axis.
 void DrawDome(float radius, int slices, int stacks);
 
-// Flat circle (filled disk, rInner = 0).
+// Circle
 inline void DrawCircle(float r, int slices) { DrawDisk(0.0f, r, slices); }
 
 // Render a bitmap string at 2D screen position (call inside HUD pass).

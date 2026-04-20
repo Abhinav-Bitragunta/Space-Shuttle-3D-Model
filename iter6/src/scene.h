@@ -1,8 +1,4 @@
-// scene.h
-
-// Iteration: 1 (Iter 2: highlight, Iter 3: lighting, Iter 4: doors, Iter 5: starfield/HUD)
-// Description: Top-level scene draw call and scene state.
-
+// Top-level scene draw call and scene state.
 #pragma once
 
 enum class HighlightPart {
@@ -15,7 +11,6 @@ struct SceneState {
     HighlightPart highlightPart;
     bool lightingEnabled;
     bool smoothShading;
-    // Iter 4
     float doorAngle;
     bool  doorOpening;
     bool  doorAnimating;
@@ -23,14 +18,13 @@ struct SceneState {
 
 extern SceneState gScene;
 
-// Globals for orbiter.cpp access (avoids circular includes)
 extern bool  gInteriorMode;
 extern float gDoorAngle;
 
 void initScene();
 void drawScene();
-void resetScene();              // Iter 5
+void resetScene();
 void cycleHighlight();
 const char* getHighlightName();
-void toggleDoorAnimation();     // Iter 4
-void doorAnimationTick(int);    // Iter 4: glutTimerFunc callback
+void toggleDoorAnimation(); 
+void doorAnimationTick(int);

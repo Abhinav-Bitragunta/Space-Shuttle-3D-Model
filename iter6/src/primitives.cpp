@@ -1,8 +1,3 @@
-// primitives.cpp
-
-// Iteration: 1
-// Description: Implementations of reusable geometry builder functions.
-
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #include <OpenGL/glu.h>
@@ -15,9 +10,7 @@
 #include <cmath>
 #include <cstring>
 
-// ---------------------------------------------------------------------------
-// DrawBox: axis-aligned box centred at local origin, with outward normals.
-// ---------------------------------------------------------------------------
+
 void DrawBox(float w, float h, float d) {
     float hw = w * 0.5f;
     float hh = h * 0.5f;
@@ -70,9 +63,7 @@ void DrawBox(float w, float h, float d) {
     glEnd();
 }
 
-// ---------------------------------------------------------------------------
-// DrawCylinder: along +Z axis using GLU quadric. Caps drawn if closed.
-// ---------------------------------------------------------------------------
+// along +Z axis. Caps drawn if closed.
 void DrawCylinder(float rBase, float rTop, float length, int slices, bool closed) {
     GLUquadric* q = gluNewQuadric();
     gluQuadricNormals(q, GLU_SMOOTH);
@@ -100,24 +91,17 @@ void DrawCylinder(float rBase, float rTop, float length, int slices, bool closed
     gluDeleteQuadric(q);
 }
 
-// ---------------------------------------------------------------------------
-// DrawTexturedCylinder: same as DrawCylinder but generates UVs. Caps omitted.
-// ---------------------------------------------------------------------------
 void DrawTexturedCylinder(float rBase, float rTop, float length, int slices, bool closed) {
     GLUquadric* q = gluNewQuadric();
     gluQuadricNormals(q, GLU_SMOOTH);
-    gluQuadricTexture(q, GL_TRUE); // The magic line that enables texture mapping
+    gluQuadricTexture(q, GL_TRUE); // texture mapping
 
     gluCylinder(q, rBase, rTop, length, slices, 1);
-
-    // Decals don't need caps, so we omit the cap drawing logic here
-    gluDeleteQuadric(q);
+    gluDeleteQuadric(q); // omit cap
 }
 
 
-// ---------------------------------------------------------------------------
-// DrawDisk: flat ring (annulus) in XY plane at Z=0.
-// ---------------------------------------------------------------------------
+// Annulus in XY plane
 void DrawDisk(float rInner, float rOuter, int slices) {
     GLUquadric* q = gluNewQuadric();
     gluQuadricNormals(q, GLU_SMOOTH);
@@ -125,9 +109,6 @@ void DrawDisk(float rInner, float rOuter, int slices) {
     gluDeleteQuadric(q);
 }
 
-// ---------------------------------------------------------------------------
-// DrawQuad: arbitrary quad with auto-computed face normal.
-// ---------------------------------------------------------------------------
 void DrawQuad(float p0[3], float p1[3], float p2[3], float p3[3]) {
     // Compute two edge vectors
     float e1[3] = { p1[0]-p0[0], p1[1]-p0[1], p1[2]-p0[2] };
@@ -138,7 +119,6 @@ void DrawQuad(float p0[3], float p1[3], float p2[3], float p3[3]) {
     float ny = e1[2]*e2[0] - e1[0]*e2[2];
     float nz = e1[0]*e2[1] - e1[1]*e2[0];
 
-    // Normalize
     float len = sqrtf(nx*nx + ny*ny + nz*nz);
     if (len > 1e-6f) { nx /= len; ny /= len; nz /= len; }
 

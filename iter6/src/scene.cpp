@@ -1,8 +1,3 @@
-// scene.cpp
-
-// Iteration: 1 (Iter 2: stack, Iter 3: lighting, Iter 4: doors, Iter 5: starfield/HUD/displaylist)
-// Description: Top-level scene draw function.
-
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -26,7 +21,7 @@ SceneState gScene;
 bool  gInteriorMode = false;
 float gDoorAngle = 0.0f;
 
-// ── Display lists (Iter 5) ──────────────────────────────
+// Display lists
 static GLuint sETList = 0;
 static GLuint sLeftSRBList = 0;
 static GLuint sRightSRBList = 0;
@@ -93,7 +88,6 @@ void cycleHighlight() {
     gScene.highlightPart = static_cast<HighlightPart>(cur);
 }
 
-// ── Door animation ──────────────────────────────────────
 void toggleDoorAnimation() {
     gScene.doorOpening = !gScene.doorOpening;
     if (!gScene.doorAnimating) {
@@ -129,7 +123,6 @@ void doorAnimationTick(int /*value*/) {
     }
 }
 
-// ── Axes ────────────────────────────────────────────────
 static void drawAxes() {
     glPushAttrib(GL_CURRENT_BIT | GL_LINE_BIT | GL_ENABLE_BIT);
     glDisable(GL_LIGHTING);
@@ -145,7 +138,7 @@ static void drawAxes() {
     glPopAttrib();
 }
 
-// ── Stack positioning ───────────────────────────────────
+// Stack positioning
 static const float kShiftZ = -Cfg::FUS_LENGTH * 0.5f;
 
 static void drawOrbiterInStack() {
@@ -161,7 +154,6 @@ static void drawRightSRBInStack() {
     glCallList(sRightSRBList);
 }
 
-// ── Struts ──────────────────────────────────────────────
 static void drawETStruts() {
     float etTopY = Cfg::ET_OFFSET_Y + Cfg::ET_RADIUS;
     float orbBotY = -Cfg::FUS_RADIUS_AFT;
@@ -203,7 +195,7 @@ static void drawFullStack() {
     drawSRBStrutsOneSide(1.0f);
 }
 
-// ── Highlight ───────────────────────────────────────────
+// Highlight
 static GLuint sYellowTex = 0;
 
 static void ensureYellowTexture() {
@@ -271,13 +263,11 @@ const char* getHighlightName() {
     }
 }
 
-// ── Main draw ───────────────────────────────────────────
 void drawScene() {
     gInteriorMode = gCamera.isInterior();
     gDoorAngle = gScene.doorAngle;
 
-    // ── Starfield (Iter 5) — drawn first, behind everything ──
-    // Always drawn: depth test disabled so geometry occludes it.
+    // Starfield drawn first, behind everything
     // Visible through open doors in interior mode.
     drawStarfield();
 
@@ -325,6 +315,5 @@ void drawScene() {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDisable(GL_LIGHTING);
 
-    // ── HUD (Iter 5) — drawn last, on top of everything ──
     drawHUD();
 }
