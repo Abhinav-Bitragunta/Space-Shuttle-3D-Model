@@ -72,6 +72,6 @@ void drawFuselage() {
 }
 
 void drawNoseCone() {
-    matOrbiterBlack();
+    matNose();
     DrawCone(Cfg::FUS_RADIUS_FWD, Cfg::NOSE_LENGTH, Cfg::FUS_SLICES);
 }
