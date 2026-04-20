@@ -244,8 +244,8 @@ namespace Cfg {
 	constexpr float  ASTEROID_SCALE_MIN = 0.2f;
 	constexpr float  ASTEROID_SCALE_MAX = 0.8f;
 
-	// --- Background Planets ---
-	constexpr int    PLANET_COUNT = 3;
+	// Background Planets
+	constexpr int    PLANET_COUNT = 0;
 	constexpr float  PLANET_DIST_MIN = 60.0f;
 	constexpr float  PLANET_DIST_MAX = 80.0f;
 	constexpr float  PLANET_RADIUS_MIN = 1.0f;

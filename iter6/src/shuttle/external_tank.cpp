@@ -13,6 +13,7 @@
 #include "../primitives.h"
 #include "../materials.h"
 #include <cstdlib>
+#include <cmath>
 
 static GLuint sFoamTex = 0;
 

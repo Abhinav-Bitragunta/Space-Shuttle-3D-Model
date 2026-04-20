@@ -81,11 +81,8 @@ void drawExhaustFlames(float stackShiftZ) {
     float t = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
     float flicker = 1.0f + Cfg::FLAME_FLICKER_AMP *
         sinf(t * Cfg::FLAME_FLICKER_SPEED * 2.0f * 3.14159f);
-    float flicker2 = 1.0f + Cfg::FLAME_FLICKER_AMP *
-        sinf(t * Cfg::FLAME_FLICKER_SPEED * 2.0f * 3.14159f * 1.3f + 1.0f);
 
     // SSME flames
-    float ssmeLen = Cfg::FLAME_SSME_LENGTH * flicker;
     float lowerY =  -Cfg::SSME_CLUSTER_Y;
     float upperY =   Cfg::SSME_CLUSTER_Y * 1.5f;
     float centroidY = (lowerY + lowerY + upperY) / 3.0f;

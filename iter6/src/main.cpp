@@ -13,6 +13,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <cmath>
 
 static int  frameCount = 0;
 static int  previousTime = 0;
