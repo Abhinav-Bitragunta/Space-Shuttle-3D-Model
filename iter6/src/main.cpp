@@ -73,6 +73,11 @@ static void display() {
 
     glutSwapBuffers();
     updateFPS();
+
+    // Continuous redraw for animated effects
+    if (gScene.thrustEnabled) {
+        glutPostRedisplay();
+    }
 }
 
 static void reshape(int w, int h) {
@@ -145,6 +150,14 @@ static void keyboard(unsigned char key, int /*x*/, int /*y*/) {
 
     case 'h': case 'H':
         cycleHighlight();
+        break;
+
+    case 't': case 'T':
+        gScene.thrustEnabled = !gScene.thrustEnabled;
+        break;
+
+    case 'g': case 'G':
+        gScene.fogEnabled = !gScene.fogEnabled;
         break;
 
     case 'r': case 'R':

@@ -321,6 +321,27 @@ namespace Cfg {
 	constexpr float  CABIN_LIGHT_ATTEN_LINEAR = 0.8f;
 	constexpr float  CABIN_LIGHT_ATTEN_QUAD = 0.3f;
 
+	//  Exhaust Flames
+	constexpr float  FLAME_SSME_LENGTH    = 0.60f;
+	constexpr float  FLAME_SSME_RADIUS    = 0.10f;
+	constexpr float  FLAME_SRB_LENGTH     = 0.80f;
+	constexpr float  FLAME_SRB_RADIUS     = 0.20f;
+	constexpr int    FLAME_SLICES         = 16;
+	constexpr float  FLAME_FLICKER_SPEED  = 8.0f;   // Hz
+	constexpr float  FLAME_FLICKER_AMP    = 0.25f;   // fraction of length
+
+	//  Fog
+	constexpr float  FOG_DENSITY = 0.012f;
+	constexpr float  COL_FOG[]   = { 0.03f, 0.03f, 0.08f };
+
+	//  ET Procedural Texture
+	constexpr int    ET_TEX_SIZE = 64;
+
+	//  RCS Thruster Flashes
+	constexpr float  RCS_FLASH_RADIUS  = 0.018f;
+	constexpr int    RCS_THRUSTER_COUNT = 6;
+	constexpr float  RCS_FIRE_THRESHOLD = 0.75f;   // sin > this = firing
+
 	//  Colours (R, G, B) 
 	constexpr float  COL_ORBITER[] = { 0.93f, 0.93f, 0.92f };
 	constexpr float  COL_TILE_BLACK[] = { 0.08f, 0.08f, 0.10f };

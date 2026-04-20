@@ -70,6 +70,12 @@ void drawHUD() {
     hudText(mx, y, buf);
     y -= lh;
 
+    snprintf(buf, sizeof(buf), "[THRUST: %s]  [FOG: %s]",
+        gScene.thrustEnabled ? "ON" : "OFF",
+        gScene.fogEnabled ? "ON" : "OFF");
+    hudText(mx, y, buf);
+    y -= lh;
+
     const char* hlName = getHighlightName();
     if (gScene.highlightPart != HighlightPart::NONE) {
         snprintf(buf, sizeof(buf), "[HIGHLIGHT: %s]", hlName);
@@ -87,7 +93,7 @@ void drawHUD() {
         hudText(mx, y, "LMB: Orbit  |  RMB: Zoom  |  MMB: Pan");  y -= lh;
         hudText(mx, y, "1-6: Presets  |  !,@,#,$,%,^: Ortho Presets  |  W: Wire  |  A: Axes  |  S: Shading");  y -= lh;
         hudText(mx, y, "L: Light  |  H: Highlight  |  O: Doors  |  F: Interior");  y -= lh;
-        hudText(mx, y, "R: Reset  |  Esc: Quit");
+        hudText(mx, y, "T: Thrust  |  G: Fog  |  R: Reset  |  Esc: Quit");
     }
 
     // Restore GL state

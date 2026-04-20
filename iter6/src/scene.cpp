@@ -16,6 +16,7 @@
 #include "shuttle/external_tank.h"
 #include "shuttle/srb.h"
 #include "shuttle/engines.h"
+#include <cmath>
 
 SceneState gScene;
 bool  gInteriorMode = false;
@@ -78,8 +79,11 @@ void initScene() {
     gScene.doorAngle = 0.0f;
     gScene.doorOpening = false;
     gScene.doorAnimating = false;
+    gScene.thrustEnabled = false;
+    gScene.fogEnabled = false;
 
     initStarfield();
+    initET();
     compileDisplayLists();
 
     sLastTime = glutGet(GLUT_ELAPSED_TIME);
@@ -90,6 +94,8 @@ void resetScene() {
     gScene.doorAngle = 0.0f;
     gScene.doorOpening = false;
     gScene.doorAnimating = false;
+    gScene.thrustEnabled = false;
+    gScene.fogEnabled = false;
     gScene.highlightPart = HighlightPart::NONE;
     gScene.wireframe = false;
     gScene.showAxes = true;
@@ -330,6 +336,32 @@ void drawScene() {
 
     if (!gScene.wireframe && !gInteriorMode) {
         drawHighlightOverlay();
+    }
+
+    // Translucent effects drawn after all opaque geometry
+    if (gScene.thrustEnabled && !gInteriorMode) {
+        glPushAttrib(GL_ALL_ATTRIB_BITS);
+        glDisable(GL_LIGHTING);
+        glDisable(GL_CULL_FACE);
+        glDepthMask(GL_FALSE);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);  // additive
+
+        drawExhaustFlames(kShiftZ);
+        drawRCSFlashes(kShiftZ);
+
+        glPopAttrib();
+    }
+
+    // Fog
+    if (gScene.fogEnabled && !gInteriorMode) {
+        glEnable(GL_FOG);
+        glFogi(GL_FOG_MODE, GL_EXP2);
+        glFogf(GL_FOG_DENSITY, Cfg::FOG_DENSITY);
+        float fogCol[] = { Cfg::COL_FOG[0], Cfg::COL_FOG[1], Cfg::COL_FOG[2], 1.0f };
+        glFogfv(GL_FOG_COLOR, fogCol);
+    } else {
+        glDisable(GL_FOG);
     }
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

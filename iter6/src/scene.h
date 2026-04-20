@@ -14,6 +14,8 @@ struct SceneState {
     float doorAngle;
     bool  doorOpening;
     bool  doorAnimating;
+    bool  thrustEnabled;
+    bool  fogEnabled;
 };
 
 extern SceneState gScene;

@@ -2,4 +2,5 @@
 
 #pragma once
 
+void initET();
 void drawET();
