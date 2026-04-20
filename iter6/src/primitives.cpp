@@ -100,8 +100,6 @@ void DrawTexturedCylinder(float rBase, float rTop, float length, int slices, boo
     gluDeleteQuadric(q); // omit cap
 }
 
-
-// Annulus in XY plane
 void DrawDisk(float rInner, float rOuter, int slices) {
     GLUquadric* q = gluNewQuadric();
     gluQuadricNormals(q, GLU_SMOOTH);
@@ -131,10 +129,6 @@ void DrawQuad(float p0[3], float p1[3], float p2[3], float p3[3]) {
     glEnd();
 }
 
-// ---------------------------------------------------------------------------
-// DrawDome: hemispherical cap along +Z axis (latitude 0° at base to 90°
-//           at pole). Base sits at Z=0, pole at Z=+radius.
-// ---------------------------------------------------------------------------
 void DrawDome(float radius, int slices, int stacks) {
     const float PI = 3.14159265358979323846f;
 
@@ -174,9 +168,6 @@ void DrawDome(float radius, int slices, int stacks) {
     }
 }
 
-// ---------------------------------------------------------------------------
-// DrawText2D: bitmap string at screen position. Call inside HUD pass.
-// ---------------------------------------------------------------------------
 void DrawText2D(float x, float y, const char* text, void* font) {
     if (!font) font = GLUT_BITMAP_HELVETICA_12;
     glRasterPos2f(x, y);

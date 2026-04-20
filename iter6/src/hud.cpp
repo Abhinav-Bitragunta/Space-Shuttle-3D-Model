@@ -1,10 +1,4 @@
-﻿// hud.cpp
-
-// Iteration: 5
-// Description: 2D HUD overlay — switches to orthographic projection,
-//              renders status text and control legend, then restores state.
-
-#ifdef __APPLE__
+﻿#ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>
@@ -18,22 +12,18 @@
 
 #include <cstdio>
 
-// ---------------------------------------------------------------------------
-// Helper: draw a single line of text.  x,y in screen pixels from bottom-left.
-// ---------------------------------------------------------------------------
+// draw a single line of text.  x,y in screen pixels from bottom-left.
 static void hudText(float x, float y, const char* str, void* font = nullptr) {
     if (!font) font = GLUT_BITMAP_HELVETICA_12;
     DrawText2D(x, y, str, font);
 }
 
-// ---------------------------------------------------------------------------
-// drawHUD: called at the end of each frame after the 3D scene.
-// ---------------------------------------------------------------------------
+
 void drawHUD() {
     int w = glutGet(GLUT_WINDOW_WIDTH);
     int h = glutGet(GLUT_WINDOW_HEIGHT);
 
-    // ── Save GL state and switch to 2D ortho ────────────
+    // Save GL state and switch to 2D ortho
     glPushAttrib(GL_ALL_ATTRIB_BITS);
     glDisable(GL_LIGHTING);
     glDisable(GL_DEPTH_TEST);
@@ -52,10 +42,9 @@ void drawHUD() {
     float my = Cfg::HUD_MARGIN_Y;
     float lh = Cfg::HUD_LINE_H;
 
-    // ── Status block (top-left) ─────────────────────────
+    // Status block (top-left)
     float y = h - my;
 
-    // View mode
     const char* viewStr = "EXTERIOR";
     if (gCamera.mode == Camera::Mode::INTERIOR)  viewStr = "INTERIOR";
     if (gCamera.mode == Camera::Mode::CINEMATIC) viewStr = "CINEMATIC";
@@ -87,7 +76,7 @@ void drawHUD() {
         hudText(mx, y, buf);
     }
 
-    // ── Control legend (bottom-left) ────────────────────
+    // Control legend (bottom-left)
     glColor3fv(Cfg::COL_HUD_DIM);
     y = my + lh * 8;
     if (gCamera.mode == Camera::Mode::INTERIOR) {
@@ -101,13 +90,12 @@ void drawHUD() {
         hudText(mx, y, "R: Reset  |  Esc: Quit");
     }
 
-    // ── Restore GL state ────────────────────────────────
+    // Restore GL state
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
     glPopAttrib();
 
-    // Re-enable depth test (Iter 5 common pitfall)
     glEnable(GL_DEPTH_TEST);
 }

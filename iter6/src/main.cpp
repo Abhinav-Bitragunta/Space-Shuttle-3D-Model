@@ -1,8 +1,3 @@
-// main.cpp
-
-// Iteration: 1 (Iter 2: H, Iter 3: S/L, Iter 4: F/O/WASD, Iter 5: R/HUD/starfield)
-// Description: GLUT initialisation and callback registration.
-
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #include <OpenGL/glu.h>
@@ -84,7 +79,6 @@ static void reshape(int w, int h) {
 static void keyboard(unsigned char key, int /*x*/, int /*y*/) {
     bool interior = gCamera.isInterior();
 
-    // In interior mode, WASD = movement (overrides exterior toggles)
     if (interior) {
         switch (key) {
         case 'w': case 'W':
@@ -148,13 +142,9 @@ static void keyboard(unsigned char key, int /*x*/, int /*y*/) {
         cycleHighlight();
         break;
 
-    case 'r': case 'R':  // Iter 5: reset all
+    case 'r': case 'R':
         resetScene();
         gCamera.reset();
-        break;
-
-    case ' ':  // Iter 5: separation animation placeholder
-        // TODO: Iter 5 animation — SRB + ET separation
         break;
 
     case '1': case '2': case '3': case '4': case '5': case '6':

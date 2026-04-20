@@ -40,7 +40,7 @@ namespace Cfg {
 	constexpr float  VSTAB_Z_ATTACH = 0.3f;
 	constexpr float  VSTAB_Y_BASE = 0.0f;
 
-	//  Crew Cabin Exterior (Iter 2) 
+	//  Crew Cabin Exterior
 	constexpr float  CABIN_HUMP_WIDTH = 0.30f;
 	constexpr float  CABIN_HUMP_HEIGHT = 0.15f;
 	constexpr float  CABIN_HUMP_LENGTH = 1.15f;
@@ -53,11 +53,10 @@ namespace Cfg {
 	constexpr float  WINDSHIELD_GAP = 0.02f;
 
 	//  Payload Bay / Door Region 
-	// Door dimensions derived from crew cabin so they stay aligned.
-	constexpr float  PBAY_WIDTH = CABIN_HUMP_WIDTH;   // door width = cabin width
-	constexpr float  PBAY_LENGTH = CABIN_HUMP_LENGTH; // structural bay extent = cabin length
-	constexpr float  PBAY_Z_START = CABIN_HUMP_Z - CABIN_HUMP_LENGTH * 0.5f; // cabin back edge
-	constexpr float  PBAY_Y = CABIN_HUMP_Y + CABIN_HUMP_HEIGHT; // door hinge Y = cabin top
+	constexpr float  PBAY_WIDTH = CABIN_HUMP_WIDTH;  
+	constexpr float  PBAY_LENGTH = CABIN_HUMP_LENGTH;
+	constexpr float  PBAY_Z_START = CABIN_HUMP_Z - CABIN_HUMP_LENGTH * 0.5f;
+	constexpr float  PBAY_Y = CABIN_HUMP_Y + CABIN_HUMP_HEIGHT;
 	constexpr float  PBAY_BORDER = 0.015f;
 
 	//  External Tank 
@@ -110,19 +109,19 @@ namespace Cfg {
 	// Y=0 is fuselage centreline. +Y is up.
 
 	//  Flight Deck 
-	constexpr float  FD_WIDTH = 0.40f;    // interior cabin width
-	constexpr float  FD_HEIGHT = 0.29f;    // floor to door level (PBAY_Y - FD_FLOOR_Y)
-	constexpr float  FD_FLOOR_Y = -0.02f;   // floor level
-	constexpr float  FD_Z_AFT = 2.60f;    // back wall
-	constexpr float  FD_Z_FWD = 3.50f;    // forward wall (instrument panel)
-	constexpr float  WALL_T = 0.025f;   // wall panel thickness (shared)
+	constexpr float  FD_WIDTH = 0.40f; 
+	constexpr float  FD_HEIGHT = 0.29f;
+	constexpr float  FD_FLOOR_Y = -0.02f;
+	constexpr float  FD_Z_AFT = 2.60f;
+	constexpr float  FD_Z_FWD = 3.50f;
+	constexpr float  WALL_T = 0.025f; 
 
 	// Seats
 	constexpr float  SEAT_WIDTH = 0.10f;
 	constexpr float  SEAT_DEPTH = 0.12f;
-	constexpr float  SEAT_HEIGHT = 0.04f;    // seat pan thickness
-	constexpr float  SEAT_BACK_H = 0.12f;    // backrest height
-	constexpr float  SEAT_BACK_T = 0.02f;    // backrest thickness
+	constexpr float  SEAT_HEIGHT = 0.04f;
+	constexpr float  SEAT_BACK_H = 0.12f;
+	constexpr float  SEAT_BACK_T = 0.02f;
 	constexpr float  SEAT_LEG_H = 0.04f;    // leg height from floor
 	constexpr float  SEAT_SPACING = 0.16f;    // distance between seat centres
 	constexpr float  SEAT_Z = 2.90f;    // Z position of seats
@@ -157,13 +156,13 @@ namespace Cfg {
 	constexpr float  SIDE_CON_D = 0.30f;
 
 	// Windshield interior frames
-	constexpr float  WS_FRAME_T = 0.012f;   // frame member thickness
+	constexpr float  WS_FRAME_T = 0.012f;
 	constexpr int    WS_PANES_X = 3;        // panes across
 	constexpr int    WS_PANES_Y = 2;        // panes vertically
 
 	//  Mid-Deck 
 	constexpr float  MD_FLOOR_Y = -0.26f;
-	constexpr float  MD_CEIL_Y = FD_FLOOR_Y;   // mid-deck ceiling = flight deck floor
+	constexpr float  MD_CEIL_Y = FD_FLOOR_Y;
 	constexpr float  MD_Z_AFT = 2.60f;
 	constexpr float  MD_Z_FWD = 3.40f;
 	constexpr float  MD_WIDTH = 0.38f;
@@ -199,9 +198,8 @@ namespace Cfg {
 	constexpr float  FRAME_H = 0.020f;
 	constexpr int    FRAME_COUNT = 8;
 
-	//  Cabin Doors — two segments around overhead panel 
-	// split into two front and back segment.
-	constexpr float  DOOR_GAP_MARGIN = 0.0f;    // doors abut overhead
+	//  Cabin Doors
+	constexpr float  DOOR_GAP_MARGIN = 0.0f;
 	constexpr float  DOOR_GAP_Z_AFT = OVERHEAD_Z - OVERHEAD_D * 0.5f - DOOR_GAP_MARGIN;
 	constexpr float  DOOR_GAP_Z_FWD = OVERHEAD_Z + OVERHEAD_D * 0.5f + DOOR_GAP_MARGIN;
 
@@ -213,10 +211,10 @@ namespace Cfg {
 	constexpr float  DOOR_FWD_Z_START = DOOR_GAP_Z_FWD;                                    
 	constexpr float  DOOR_FWD_LENGTH = (PBAY_Z_START + PBAY_LENGTH) - DOOR_FWD_Z_START;
 
-	constexpr float  DOOR_PANEL_T = 0.015f;   // door panel thickness
-	constexpr float  DOOR_RIB_W = 0.01f;      // structural rib width on door interior
-	constexpr int    DOOR_AFT_RIB_COUNT = 4;   // ribs on back door
-	constexpr int    DOOR_FWD_RIB_COUNT = 2;   // ribs on forward door
+	constexpr float  DOOR_PANEL_T = 0.015f; 
+	constexpr float  DOOR_RIB_W = 0.01f;    
+	constexpr int    DOOR_AFT_RIB_COUNT = 4;
+	constexpr int    DOOR_FWD_RIB_COUNT = 2;
 
 	//  Door Animation 
 	constexpr float  DOOR_OPEN_DEG = 175.0f;
@@ -288,7 +286,7 @@ namespace Cfg {
 	constexpr float  EARTH_DIFFUSE[] = { 0.10f, 0.12f, 0.20f, 1.0f };
 	constexpr float  EARTH_SPECULAR[] = { 0.0f,  0.0f,  0.0f,  1.0f };
 
-	//  Cabin Light — GL_LIGHT2 
+	//  Cabin Light - GL_LIGHT2 
 	constexpr float  CABIN_LIGHT_POS[] = { 0.0f, 0.30f, 1.10f, 1.0f };
 	constexpr float  CABIN_LIGHT_AMB[] = { 0.20f, 0.18f, 0.14f, 1.0f };
 	constexpr float  CABIN_LIGHT_DIFF[] = { 0.85f, 0.80f, 0.65f, 1.0f };
@@ -315,7 +313,7 @@ namespace Cfg {
 	constexpr float  COL_STRUT[] = { 0.50f, 0.50f, 0.52f };
 	constexpr float  COL_PBAY_LINE[] = { 0.30f, 0.30f, 0.32f };
 
-	// Interior colours (unlit fallback - lit appearance controlled by materials.cpp)
+	// Interior colours unlit fallback. Lit appearance controlled by materials.cpp
 	constexpr float  COL_INT_WALL[] = { 0.55f, 0.53f, 0.48f };
 	constexpr float  COL_INT_FLOOR[] = { 0.30f, 0.30f, 0.32f };
 	constexpr float  COL_INT_PANEL[] = { 0.12f, 0.13f, 0.16f };

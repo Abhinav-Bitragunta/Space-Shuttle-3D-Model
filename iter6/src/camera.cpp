@@ -1,9 +1,3 @@
-// camera.cpp
-
-// Iteration: 1 (Iter 4: interior, Iter 5: cinematic smooth lerp)
-// Description: Orbit camera + interior first-person + smooth cinematic
-//              interpolation between preset viewpoints.
-
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #include <OpenGL/glu.h>
@@ -230,7 +224,7 @@ void cameraLerpTick(int /*value*/) {
     }
 
     float dt = Cfg::CAM_LERP_TICK_MS / 1000.0f;
-    float t = 1.0f - expf(-Cfg::CAM_LERP_SPEED * dt);  // exponential ease
+    float t = 1.0f - expf(-Cfg::CAM_LERP_SPEED * dt);  // exponential easing
 
     gCamera.azimuth = lerpf(gCamera.azimuth, gCamera.targetAz, t);
     gCamera.elevation = lerpf(gCamera.elevation, gCamera.targetEl, t);
