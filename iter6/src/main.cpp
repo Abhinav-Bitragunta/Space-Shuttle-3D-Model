@@ -173,7 +173,7 @@ int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(Cfg::WIN_W, Cfg::WIN_H);
-    glutCreateWindow("Space Shuttle — Iteration 5");
+    glutCreateWindow("Space Shuttle");
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
