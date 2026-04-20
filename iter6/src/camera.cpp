@@ -31,6 +31,7 @@ void Camera::init() {
     pitch = Cfg::INTCAM_START_PITCH;
     warpIgnore = false;
     lerping = false;
+    ortho = false;
     targetAz = targetEl = targetDist = 0.0f;
     lastMouseX = lastMouseY = 0;
     activeButton = -1;
@@ -47,6 +48,7 @@ void Camera::reset() {
     panX = 0.0f;
     panY = 0.0f;
     lerping = false;
+    ortho = false;
     glutSetCursor(GLUT_CURSOR_INHERIT);
 }
 
@@ -261,6 +263,24 @@ void Camera::setPreset(int preset) {
     case 6: az = 10.0f;  el = -30.0f; d = 12.0f; break;
     default: return;
     }
+    ortho = false;
+    startLerp(az, el, d);
+}
+
+void Camera::setPresetOrtho(int preset) {
+    if (mode == Mode::INTERIOR) return;
+
+    float az = azimuth, el = elevation, d = Cfg::CAM_DEFAULT_DISTANCE;
+    switch (preset) {
+    case 1: az = 0.0f;   el = 0.0f;             break;
+    case 2: az = 90.0f;  el = 0.0f;             break;
+    case 3: az = 180.0f; el = 0.0f;             break;
+    case 4: az = 0.0f;   el = 89.0f;            break;
+    case 5: az = 35.0f;  el = 25.0f;            break;
+    case 6: az = 10.0f;  el = -30.0f; d = 12.0f; break;
+    default: return;
+    }
+    ortho = true;
     startLerp(az, el, d);
 }
 

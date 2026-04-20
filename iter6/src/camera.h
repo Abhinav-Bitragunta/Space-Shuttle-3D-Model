@@ -15,6 +15,7 @@ struct Camera {
     // Cinematic lerp
     float targetAz, targetEl, targetDist;
     bool  lerping;
+    bool  ortho;
 
     // Mouse tracking
     int lastMouseX, lastMouseY;
@@ -33,6 +34,7 @@ struct Camera {
     void moveUp(float amount);
     void clampPosition();                                
     void setPreset(int preset);
+    void setPresetOrtho(int preset);
     void startLerp(float az, float el, float dist);      
     void getTitleInfo(char* buf, int bufSize) const;
     bool isInterior() const { return mode == Mode::INTERIOR; }

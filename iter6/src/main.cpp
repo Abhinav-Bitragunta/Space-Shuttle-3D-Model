@@ -56,6 +56,11 @@ static void display() {
     if (gCamera.isInterior()) {
         gluPerspective(Cfg::INTERIOR_FOV, aspect, Cfg::INTERIOR_NEAR, Cfg::FAR_CLIP);
     }
+    else if (gCamera.ortho) {
+        float halfH = gCamera.distance * tanf(Cfg::FOV_Y * 0.5f * 3.14159265f / 180.0f);
+        float halfW = halfH * aspect;
+        glOrtho(-halfW, halfW, -halfH, halfH, Cfg::NEAR_CLIP, Cfg::FAR_CLIP);
+    }
     else {
         gluPerspective(Cfg::FOV_Y, aspect, Cfg::NEAR_CLIP, Cfg::FAR_CLIP);
     }
@@ -150,6 +155,13 @@ static void keyboard(unsigned char key, int /*x*/, int /*y*/) {
     case '1': case '2': case '3': case '4': case '5': case '6':
         gCamera.setPreset(key - '0');
         break;
+
+    case '!': gCamera.setPresetOrtho(1); break;
+    case '@': gCamera.setPresetOrtho(2); break;
+    case '#': gCamera.setPresetOrtho(3); break;
+    case '$': gCamera.setPresetOrtho(4); break;
+    case '%': gCamera.setPresetOrtho(5); break;
+    case '^': gCamera.setPresetOrtho(6); break;
 
     default:
         break;

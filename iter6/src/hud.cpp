@@ -85,7 +85,7 @@ void drawHUD() {
     }
     else {
         hudText(mx, y, "LMB: Orbit  |  RMB: Zoom  |  MMB: Pan");  y -= lh;
-        hudText(mx, y, "1-6: Presets  |  W: Wire  |  A: Axes  |  S: Shading");  y -= lh;
+        hudText(mx, y, "1-6: Presets  |  !,@,#,$,%,^: Ortho Presets  |  W: Wire  |  A: Axes  |  S: Shading");  y -= lh;
         hudText(mx, y, "L: Light  |  H: Highlight  |  O: Doors  |  F: Interior");  y -= lh;
         hudText(mx, y, "R: Reset  |  Esc: Quit");
     }
