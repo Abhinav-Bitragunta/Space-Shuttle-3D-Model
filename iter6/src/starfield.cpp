@@ -233,7 +233,7 @@ void initStarfield() {
         auto& p = gPlanets[i];
         
         // Distribute them evenly around the sphere horizon
-        float angle = (i * (2.0f * M_PI / Cfg::PLANET_COUNT)) + rnd(-0.5f, 0.5f);
+        float angle = (i * (2.0f * M_PI / std::max(1, Cfg::PLANET_COUNT))) + rnd(-0.5f, 0.5f);
         float dist = rnd(Cfg::PLANET_DIST_MIN, Cfg::PLANET_DIST_MAX);
         
         p.x = cos(angle) * dist;
