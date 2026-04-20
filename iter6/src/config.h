@@ -225,6 +225,50 @@ namespace Cfg {
 	constexpr int    STAR_COUNT = 2000;
 	constexpr float  STAR_SPHERE_R = 80.0f;
 
+	// Galaxies
+	constexpr int    GALAXY_COUNT = 20;
+	constexpr int    GALAXY_STARS_MIN = 2000;
+	constexpr int    GALAXY_STARS_MAX = 5000;
+	constexpr float  GALAXY_MAX_RADIUS = 15.0f;
+
+	// Meteors (Shooting Stars)
+	constexpr int    METEOR_COUNT = 50;
+	constexpr float  METEOR_SPEED_MIN = 30.0f;
+	constexpr float  METEOR_SPEED_MAX = 70.0f;
+	constexpr float  METEOR_LENGTH = 8.0f;
+
+	// Asteroids
+	constexpr int    ASTEROID_COUNT = 10;
+	constexpr float  ASTEROID_DIST_MIN = 30.0f;
+	constexpr float  ASTEROID_DIST_MAX = 60.0f;
+	constexpr float  ASTEROID_SCALE_MIN = 0.2f;
+	constexpr float  ASTEROID_SCALE_MAX = 0.8f;
+
+	// --- Background Planets ---
+	constexpr int    PLANET_COUNT = 30;
+	constexpr float  PLANET_DIST_MIN = 60.0f;
+	constexpr float  PLANET_DIST_MAX = 80.0f;
+	constexpr float  PLANET_RADIUS_MIN = 1.0f;
+	constexpr float  PLANET_RADIUS_MAX = 4.5f;
+
+	constexpr int    PLANET_TEXTURE_COUNT = 14;
+	constexpr const char* PLANET_TEXTURE_PATHS[] = {
+		"textures/2k_ceres_fictional.bmp",
+		"textures/2k_earth_daymap.bmp",
+		"textures/2k_eris_fictional.bmp",
+		"textures/2k_haumea_fictional.bmp",
+		"textures/2k_jupiter.bmp",
+		"textures/2k_makemake_fictional.bmp",
+		"textures/2k_mars.bmp",
+		"textures/2k_mercury.bmp",
+		"textures/2k_neptune.bmp",
+		"textures/2k_saturn.bmp",
+		"textures/2k_saturn_ring_alpha.bmp",
+		"textures/2k_uranus.bmp",
+		"textures/2k_venus_atmosphere.bmp",
+		"textures/2k_venus_surface.bmp",
+	};
+
 	//  HUD 
 	constexpr float  HUD_MARGIN_X = 12.0f;
 	constexpr float  HUD_MARGIN_Y = 16.0f;

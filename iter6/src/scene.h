@@ -28,3 +28,4 @@ void cycleHighlight();
 const char* getHighlightName();
 void toggleDoorAnimation(); 
 void doorAnimationTick(int);
+void backgroundAnimationTick(int value);

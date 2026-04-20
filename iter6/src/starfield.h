@@ -1,5 +1,8 @@
-// 2000 random stars on a large sphere
+// Dynamic Starfield, Galaxies, Meteors, and Asteroids
 #pragma once
 
-void initStarfield();   // call once at startup, builds display list
-void drawStarfield();   // call each frame before the main scene
+void initStarfield();              // Call once at startup
+void updateBackground(float dt);   // Call every frame with delta time
+void drawStarfield();              // Draw unlit background elements (stars, galaxies, meteors)
+void drawBackgroundAsteroids();    // Draw lit background elements (asteroids)
+void drawBackgroundPlanets();      // Draws lit planets

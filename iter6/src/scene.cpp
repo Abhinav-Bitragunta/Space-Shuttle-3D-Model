@@ -25,6 +25,7 @@ float gDoorAngle = 0.0f;
 static GLuint sETList = 0;
 static GLuint sLeftSRBList = 0;
 static GLuint sRightSRBList = 0;
+static int sLastTime = 0;
 
 static void compileDisplayLists() {
     float kShiftZ = -Cfg::FUS_LENGTH * 0.5f;
@@ -57,6 +58,17 @@ static void compileDisplayLists() {
     glEndList();
 }
 
+void backgroundAnimationTick(int /*value*/) {
+    int now = glutGet(GLUT_ELAPSED_TIME);
+    float dt = (now - sLastTime) / 1000.0f;
+    sLastTime = now;
+    
+    updateBackground(dt);
+    glutPostRedisplay();
+    
+    glutTimerFunc(Cfg::ANIM_TICK_MS, backgroundAnimationTick, 0);
+}
+
 void initScene() {
     gScene.wireframe = false;
     gScene.showAxes = true;
@@ -69,6 +81,9 @@ void initScene() {
 
     initStarfield();
     compileDisplayLists();
+
+    sLastTime = glutGet(GLUT_ELAPSED_TIME);
+    glutTimerFunc(Cfg::ANIM_TICK_MS, backgroundAnimationTick, 0);
 }
 
 void resetScene() {
@@ -307,6 +322,11 @@ void drawScene() {
     }
 
     drawFullStack();
+
+    if (!gInteriorMode) {
+        drawBackgroundAsteroids(); 
+        drawBackgroundPlanets();
+    }
 
     if (!gScene.wireframe && !gInteriorMode) {
         drawHighlightOverlay();
