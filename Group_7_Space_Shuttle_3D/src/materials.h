@@ -1,7 +1,8 @@
 #pragma once
 
 void matOrbiterWhite();     // White thermal tiles (upper fuselage)
-void matOrbiterBlack();     // Black thermal tiles (lower fuselage / nose)
+void matOrbiterBlack();     // Black thermal tiles (lower fuselage)
+void matNose();             // Nose cone
 void matET();               // Matte orange external tank
 void matETDome();           // ET dome cap
 void matSRB();              // Light-grey metallic SRB body

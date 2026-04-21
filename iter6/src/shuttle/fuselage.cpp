@@ -50,7 +50,7 @@ void drawFuselage() {
         glTranslatef(0.5f, 0.5f, 0.0f);
 
         // length, height, depth of text
-        glScalef(8.0f, -6.0f, 3.0f);
+        glScalef(5.0f, -6.0f, 3.0f);
 
         glRotatef(90.0f, 0.0f, 0.0f, 1.0f);         // Rotate 90 degrees to run longitudinally
         glTranslatef(-0.75f, -textCenterT, 0.0f);

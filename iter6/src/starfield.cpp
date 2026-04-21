@@ -18,7 +18,7 @@ static float rnd(float min, float max) {
     return min + (max - min) * (static_cast<float>(rand()) / RAND_MAX);
 }
 
-// --- Data Structures ---
+// Data Structures
 enum GalaxyType { SPIRAL, ELLIPTICAL, NEBULA };
 
 struct Meteor {
@@ -52,7 +52,7 @@ static std::vector<Meteor> gMeteors;
 static std::vector<Asteroid> gAsteroids;
 static std::vector<Planet> gPlanets;
 
-// --- Galaxy Generators ---
+// Galaxy Generators
 static void buildGalaxy(GalaxyType type, float cx, float cy, float cz, float radius, int stars, float rTint, float gTint, float bTint) {
     // Random 3D orientation
     float rotX = rnd(0, 360);
@@ -156,7 +156,7 @@ static void spawnMeteor(Meteor& m) {
 void initStarfield() {
     srand(1337); 
 
-    // 1. Compile Standard Stars
+    //  Compile Standard Stars
     sStarList = glGenLists(1);
     glNewList(sStarList, GL_COMPILE);
     glBegin(GL_POINTS);
@@ -181,7 +181,7 @@ void initStarfield() {
     glEnd();
     glEndList();
 
-    // 2. Compile Galaxies (Now using Alpha Blending)
+    //  Compile Galaxies
     sGalaxyList = glGenLists(1);
     glNewList(sGalaxyList, GL_COMPILE);
     for(int i = 0; i < Cfg::GALAXY_COUNT; ++i) {
@@ -206,7 +206,7 @@ void initStarfield() {
     }
     glEndList();
 
-    // 3. Setup Meteors & Asteroids (Same logic as before)
+    // Setup Meteors & Asteroids (Same logic as before)
     gMeteors.resize(Cfg::METEOR_COUNT);
     for (auto& m : gMeteors) { m.active = false; m.delay = rnd(0.0f, 5.0f); }
 
@@ -227,7 +227,7 @@ void initStarfield() {
         a.scaleZ = rnd(Cfg::ASTEROID_SCALE_MIN, Cfg::ASTEROID_SCALE_MAX);
     }
 
-    // 4. Setup Distant Planets
+    // Setup Distant Planets
     gPlanets.resize(Cfg::PLANET_COUNT);
     for(int i = 0; i < Cfg::PLANET_COUNT; i++) {
         auto& p = gPlanets[i];
@@ -293,7 +293,7 @@ void drawStarfield() {
     glPointSize(1.2f);
     if (sStarList != 0) glCallList(sStarList);
 
-    // Galaxies (NOW WITH ADDITIVE BLENDING FOR NEBULA EFFECT)
+    // Galaxies
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE); // Additive blend makes overlapping points glow brightly
     glPointSize(1.5f);
@@ -351,22 +351,19 @@ void drawBackgroundPlanets() {
     GLfloat mat_specular[] = { 0.1f, 0.1f, 0.1f, 1.0f };
     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 
+    // tilt, draw sphere, rings
     for(const auto& p : gPlanets) {
         glPushMatrix();
         glTranslatef(p.x, p.y, p.z);
         
-        // Tilt the planet on its axis
         glRotatef(p.tilt, 1.0f, 0.0f, 1.0f);
         glRotatef(p.rotAngle, 0.0f, 1.0f, 0.0f);
 
-        // Draw the Planet Sphere
         glColor3f(p.r, p.g, p.b);
         glutSolidSphere(p.radius, 32, 32);
 
-        // Draw Rings if it has them
         if (p.hasRings) {
             glColor3f(p.ringColor[0], p.ringColor[1], p.ringColor[2]);
-            // Torus (inner radius, outer radius, sides, rings)
             glutSolidTorus(0.2f, p.radius * 1.8f, 12, 48);
         }
         

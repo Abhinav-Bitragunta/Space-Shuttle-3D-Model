@@ -19,7 +19,7 @@ namespace Cfg {
 	constexpr int    FUS_SLICES = 32;
 
 	//  Fuselage Text 
-	constexpr const char* FUSELAGE_TEXT = "CS 302N";
+	constexpr const char* FUSELAGE_TEXT = "CS 302N G7";
 	constexpr float  FUSELAGE_TEXT_SCALE = 0.0015f;
 	constexpr float  FUSELAGE_TEXT_Z = 2.0f;       // Middle of the fuselage
 	constexpr float  FUSELAGE_TEXT_Y = 0.0f;       // Vertical alignment
@@ -61,7 +61,7 @@ namespace Cfg {
 
 	//  External Tank 
 	constexpr float  ET_LENGTH = 4.8f;
-	constexpr float  ET_RADIUS = 0.44f;
+	constexpr float  ET_RADIUS = 0.40f;
 	constexpr float  ET_OFFSET_Y = -0.68f;
 	constexpr float  ET_OFFSET_Z = -0.30f;
 	constexpr int    ET_SLICES = 24;

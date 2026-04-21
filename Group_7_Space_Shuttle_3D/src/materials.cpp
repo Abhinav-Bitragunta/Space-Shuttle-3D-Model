@@ -37,6 +37,13 @@ void matOrbiterBlack() {
     applyMat(Cfg::COL_TILE_BLACK, amb, diff, spec, 5.0f);
 }
 
+void matNose() {
+    float amb[] = { 0.02f, 0.02f, 0.03f, 1.0f };
+    float diff[] = { 0.08f, 0.08f, 0.10f, 1.0f };
+    float spec[] = { 0.05f, 0.05f, 0.05f, 1.0f }; // low spec
+    applyMat(Cfg::COL_NOSE, amb, diff, spec, 5.0f);
+}
+
 void matET() {
     float amb[] = { 0.20f, 0.10f, 0.03f, 1.0f };
     float diff[] = { 0.85f, 0.40f, 0.10f, 1.0f };
